@@ -52,13 +52,15 @@ public class HotelDAO {
 
     public List<Hotel> listar() throws SQLException {
         List<Hotel> hoteis = new ArrayList<>();
-        String sql = "SELECT * FROM hoteis";
-        try (Connection conn = ConexaoBD.conectar();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        String sql = "SELECT DISTINCT id, nome, localizacao FROM hoteis";
+        try (Connection connection = ConexaoBD.conectar();
+                PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                Hotel hotel = new Hotel(rs.getString("nome"), rs.getString("localizacao"));
+                Hotel hotel = new Hotel();
                 hotel.setId(rs.getInt("id"));
+                hotel.setNome(rs.getString("nome"));
+                hotel.setLocalizacao(rs.getString("localizacao"));
                 hoteis.add(hotel);
             }
         }

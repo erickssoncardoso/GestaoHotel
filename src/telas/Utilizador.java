@@ -123,6 +123,12 @@ public class Utilizador extends javax.swing.JInternalFrame {
         jLabel3.setText("Nome");
 
         txtid.setEditable(false);
+        txtid.setBackground(new java.awt.Color(204, 204, 204));
+        txtid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidActionPerformed(evt);
+            }
+        });
 
         btnAtualizar.setText("Atualizar");
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -389,6 +395,10 @@ private void atualizarTabelaUtilizadores() {
         JOptionPane.showMessageDialog(this, "Ocorreu um erro ao eliminar o utilizador: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

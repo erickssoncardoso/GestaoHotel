@@ -44,29 +44,14 @@ public class ConsultaHotel extends javax.swing.JInternalFrame {
      * Creates new form TelaAcomodacao
      */
     public ConsultaHotel() {
-          initComponents();
+        initComponents();
     hotelDAO = new HotelDAO();
     reservaDAO = new ReservaDAO();
-    preencherComboboxLocalizacao();
+    atualizarTabelaHoteis();
         
     }
     
-    private void preencherComboboxLocalizacao() {
-    try {
-        // Limpar itens existentes no ComboBox
-        ComboboxLocalizacao.removeAllItems();
-        
-        // Obter a lista de localizações disponíveis
-        List<String> localizacoes = hotelDAO.listarLocalizacoes();
-        
-        // Adicionar as localizações ao ComboBox
-        for (String localizacao : localizacoes) {
-            ComboboxLocalizacao.addItem(localizacao);
-        }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Erro ao carregar localizações: " + e.getMessage());
-    }
-}
+    
 
     
     /**
@@ -81,16 +66,8 @@ public class ConsultaHotel extends javax.swing.JInternalFrame {
         labelLoc1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        labelAcomodacao = new javax.swing.JLabel();
-        labelLoc = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        ComboboxLocalizacao = new javax.swing.JComboBox<>();
-        jDateCheckIn = new com.toedter.calendar.JDateChooser();
-        jDateCheckOut = new com.toedter.calendar.JDateChooser();
-        labelAcomodacao1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
 
         labelLoc1.setText("Localização");
 
@@ -107,7 +84,7 @@ public class ConsultaHotel extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Localização", "Check-In", "Check-Out"
+                "Id Hotel", "Nome ", "Localização"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,10 +93,6 @@ public class ConsultaHotel extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-
-        labelAcomodacao.setText("Check-In");
-
-        labelLoc.setText("Localização");
 
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,77 +104,37 @@ public class ConsultaHotel extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Gestão de Hoteis");
 
-        ComboboxLocalizacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        labelAcomodacao1.setText("Check-Out");
-
-        jLabel1.setText("Id Utilizador");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(labelLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(labelAcomodacao)
-                                .addComponent(ComboboxLocalizacao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jDateCheckIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jDateCheckOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(labelAcomodacao1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(274, 274, 274)
-                .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel5)
+                        .addGap(261, 261, 261))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelLoc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ComboboxLocalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(labelAcomodacao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateCheckIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelAcomodacao1)
-                        .addGap(11, 11, 11)
-                        .addComponent(jDateCheckOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(btnPesquisar)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(btnPesquisar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void atualizarTabelaHoteis() {
-               try {
+    try {
         // Limpa o modelo da tabela
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -228,68 +161,15 @@ public class ConsultaHotel extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-    // Obter os valores selecionados nos campos
-    String localizacao = (String) ComboboxLocalizacao.getSelectedItem();
-    java.util.Date checkIn = jDateCheckIn.getDate();
-    java.util.Date checkOut = jDateCheckOut.getDate();
-    String idUsuarioText = jTextField1.getText();
-    int idUsuario = 0;
-
-    // Validar se as datas foram selecionadas corretamente
-    if (checkIn == null || checkOut == null) {
-        JOptionPane.showMessageDialog(this, "Selecione as datas de check-in e check-out.");
-        return;
-    }
-
-    // Se o ID do usuário não estiver vazio, tentar converter para inteiro
-    if (!idUsuarioText.isEmpty()) {
-        try {
-            idUsuario = Integer.parseInt(idUsuarioText);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Insira um número válido para o ID do usuário.");
-            return;
-        }
-    }
-
-    // Converter as datas para o formato SQL Date
-    java.sql.Date dataCheckin = new java.sql.Date(checkIn.getTime());
-    java.sql.Date dataCheckout = new java.sql.Date(checkOut.getTime());
-
-    // Chamar o método do DAO para buscar os hotéis disponíveis
-    List<Hotel> hoteisDisponiveis;
-    if (idUsuario != 0) {
-        try {
-            hoteisDisponiveis = hotelDAO.listarHoteisDisponiveisPorUsuario(idUsuario);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao buscar hotéis disponíveis para o usuário: " + e.getMessage());
-            return;
-        }
-    } else {
-        hoteisDisponiveis = hotelDAO.listarHoteisDisponiveis(localizacao, dataCheckin, dataCheckout);
-    }
-
-    // Atualizar a tabela com os hotéis encontrados
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    model.setRowCount(0); // Limpar a tabela antes de adicionar os novos resultados
-    for (Hotel hotel : hoteisDisponiveis) {
-        model.addRow(new Object[]{hotel.getLocalizacao(), dataCheckin, dataCheckout});
-    }
+    atualizarTabelaHoteis();
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComboboxLocalizacao;
     private javax.swing.JButton btnPesquisar;
-    private com.toedter.calendar.JDateChooser jDateCheckIn;
-    private com.toedter.calendar.JDateChooser jDateCheckOut;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel labelAcomodacao;
-    private javax.swing.JLabel labelAcomodacao1;
-    private javax.swing.JLabel labelLoc;
     private javax.swing.JLabel labelLoc1;
     // End of variables declaration//GEN-END:variables
 }

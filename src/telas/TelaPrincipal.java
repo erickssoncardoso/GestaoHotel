@@ -131,10 +131,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu8 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -326,15 +326,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.add(jMenu8);
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_fornecedor.png"))); // NOI18N
-        jMenuItem1.setText("Fornecedores");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem1);
-
+        jMenu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/hotel (2).png"))); // NOI18N
         jMenu11.setText("Hoteis");
 
         jMenuItem8.setText("Registrar");
@@ -346,12 +338,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu11.add(jMenuItem8);
 
         jMenuItem9.setText("Consultar");
+        jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem9MouseClicked(evt);
+            }
+        });
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
             }
         });
         jMenu11.add(jMenuItem9);
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem1);
 
         jMenu1.add(jMenu11);
 
@@ -516,43 +521,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
    
     }//GEN-LAST:event_menuSairActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        Utilizador utilizador = new Utilizador();
-        telaFundo.add(utilizador);
-        utilizador.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void menuCadQuartosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadQuartosActionPerformed
-        TelaAcomodacao telaacomodacao = new TelaAcomodacao();
-        telaFundo.add(telaacomodacao);
-        telaacomodacao.setVisible(true);
-    }//GEN-LAST:event_menuCadQuartosActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        TelaHotel tela=new TelaHotel();
-        telaFundo.add(tela);
-        tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         TelaReserva reserva = new TelaReserva();
         telaFundo.add(reserva);
         reserva.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        ConsultaHotel consulta=new ConsultaHotel();
-        telaFundo.add(consulta);
-        consulta.setVisible(true);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void menuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
     
@@ -619,6 +592,47 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaFundo.add(cons);
         cons.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        
+        ConsultaHotel consulta=new ConsultaHotel();
+        telaFundo.add(consulta);
+        consulta.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        TelaHotel tela=new TelaHotel();
+        telaFundo.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Utilizador utilizador = new Utilizador();
+        telaFundo.add(utilizador);
+        utilizador.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void menuCadQuartosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadQuartosActionPerformed
+        TelaAcomodacao telaacomodacao = new TelaAcomodacao();
+        telaFundo.add(telaacomodacao);
+        telaacomodacao.setVisible(true);
+    }//GEN-LAST:event_menuCadQuartosActionPerformed
+
+    private void jMenuItem9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MouseClicked
+        ConsultaHotel consulta=new ConsultaHotel();
+        telaFundo.add(consulta);
+        consulta.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        ConsultaHotel consulta=new ConsultaHotel();
+        telaFundo.add(consulta);
+        consulta.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     
     
