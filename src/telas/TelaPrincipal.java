@@ -6,6 +6,7 @@ package telas;
 
 import conexao.ConexaoBD;
 import dao.UtilizadoresDAO;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -517,13 +518,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
-        // TODO add your handling code here:
+        menuSairActionPerformed(evt);
         
     }//GEN-LAST:event_menuSairMouseClicked
 
     private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
-            SessionManager.logout();
-            limparUsuario();
+    SessionManager.logout();
+    limparUsuario();
     }//GEN-LAST:event_menuSairActionPerformed
 
     private void limparUsuario() {
@@ -593,7 +594,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        ConsHotel tela=new ConsHotel();
+        TelaHotel tela=new TelaHotel();
         telaFundo.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
@@ -675,6 +676,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -725,4 +727,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuSair;
     private javax.swing.JDesktopPane telaFundo;
     // End of variables declaration//GEN-END:variables
+
+    private void menuSairActionPerformed(MouseEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
 }

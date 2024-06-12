@@ -56,6 +56,45 @@ public class UtilizadoresDAO {
     public boolean isFuncionario(String username) {
         return verificarTipoUsuario(username, "Funcionario");
     }
+    public boolean existeUtilizadorComDados(String email, int contato, String username) throws SQLException {
+    String sql = "SELECT COUNT(*) AS count FROM utilizadores WHERE email = ? OR telefone = ?;"; // Coloquei telefone em vez de contato
+    try (Connection conexao = ConexaoBD.conectar();
+         PreparedStatement stmt = conexao.prepareStatement(sql)) {
+        stmt.setString(1, email);
+        stmt.setInt(2, contato);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                if (count > 0) {
+                    return true; // Já existe um usuário com o mesmo email ou telefone
+                }
+            }
+        }
+    } catch (SQLException e) {
+        System.err.println("Erro ao verificar usuário existente: " + e.getMessage());
+        throw e;
+    }
+
+    // Verificar se o username já existe na tabela users
+    String sqlUsername = "SELECT COUNT(*) AS count FROM users WHERE username = ?";
+    try (Connection conexao = ConexaoBD.conectar();
+         PreparedStatement stmt = conexao.prepareStatement(sqlUsername)) {
+        stmt.setString(1, username);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                if (count > 0) {
+                    return true; // Já existe um usuário com o mesmo username
+                }
+            }
+        }
+    } catch (SQLException e) {
+        System.err.println("Erro ao verificar username existente: " + e.getMessage());
+        throw e;
+    }
+
+    return false; // Nenhum usuário encontrado com os mesmos dados
+}
 
     private boolean verificarTipoUsuario(String username, String tipoEsperado) {
         String query = "SELECT tu.tipo FROM users u JOIN utilizadores tu ON u.utilizador_id = tu.id WHERE u.username = ?";

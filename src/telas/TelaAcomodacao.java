@@ -9,6 +9,7 @@ package telas;
  * @author ecardoso
  */
 import dao.AcomodacaoDAO;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -212,41 +213,57 @@ public class TelaAcomodacao extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  // Coletar dados dos campos de texto
-    String tipoQuarto = ComboBoxTipo.getSelectedItem().toString(); // Tipo de quarto (Simples ou Presidencial)
-    int numeroQuarto = Integer.parseInt(txtNumeroQuarto1.getText());
-    int quantidadeLeitos = Integer.parseInt(txtNumeroCama.getText()); // Número de camas
-    
-    double precoBase = Double.parseDouble(TextFieldPreco.getText());
-     int hotelid=Integer.parseInt(txtHotelId.getText()); // Número de camas   
-    // Criar uma nova instância de Acomodacao com base no tipo de quarto selecionado
-    Acomodacao novaAcomodacao;
-    if (tipoQuarto.equals("Simples")) {
-        novaAcomodacao = new QuartoSimples(numeroQuarto,tipoQuarto,quantidadeLeitos,precoBase,hotelid);
-    } else if (tipoQuarto.equals("Presidencial")) {
-        novaAcomodacao = new SuitePresidencial(numeroQuarto,tipoQuarto,quantidadeLeitos,precoBase,hotelid);
-    } else {
-        // Lidar com tipos de quarto desconhecidos
-        System.out.println("Tipo de quarto desconhecido: " + tipoQuarto);
-        return;
-    }
-    
-    // Definir quantidade de leitos
-    novaAcomodacao.setQuantidadeLeitos(quantidadeLeitos);
-    novaAcomodacao.setPrecoBase(precoBase);
-    novaAcomodacao.setId(numeroQuarto);
-    novaAcomodacao.setTipo(tipoQuarto);
-    novaAcomodacao.setIdHotel(hotelid);
-    
-    // Inserir acomodação no banco de dados
-    AcomodacaoDAO acomodacaoDAO = new AcomodacaoDAO();
-    acomodacaoDAO.inserirAcomodacao(novaAcomodacao);
-    JOptionPane.showMessageDialog(TelaAcomodacao.this, "Acomodação criada!");
-    
-    // Atualizar tabela
-    atualizarTabelaAcomodacoes();
-    
-        
+  try {
+        // Coletar dados dos campos de texto
+        String tipoQuarto = ComboBoxTipo.getSelectedItem().toString(); // Tipo de quarto (Simples ou Presidencial)
+        int numeroQuarto = Integer.parseInt(txtNumeroQuarto1.getText());
+        int quantidadeLeitos = Integer.parseInt(txtNumeroCama.getText()); // Número de camas
+        double precoBase = Double.parseDouble(TextFieldPreco.getText());
+        int hotelid = Integer.parseInt(txtHotelId.getText()); // ID do hotel
+
+        // Verificar se já existe uma acomodação com a mesma quantidade de leitos e mesmo hotel
+        AcomodacaoDAO acomodacaoDAO = new AcomodacaoDAO();
+        if (acomodacaoDAO.existeAcomodacaoPorQuantidadeLeitos(quantidadeLeitos, hotelid)) {
+            JOptionPane.showMessageDialog(this, "Já existe uma acomodação com a mesma quantidade de leitos neste hotel. Por favor, verifique os dados.", "Erro ao adicionar acomodação", JOptionPane.ERROR_MESSAGE);
+            return; // Sai do método sem adicionar a acomodação
+        }
+
+        // Criar uma nova instância de Acomodacao com base no tipo de quarto selecionado
+        Acomodacao novaAcomodacao;
+        if (tipoQuarto.equals("Simples")) {
+            novaAcomodacao = new QuartoSimples(numeroQuarto, tipoQuarto, quantidadeLeitos, precoBase, hotelid);
+        } else if (tipoQuarto.equals("Presidencial")) {
+            novaAcomodacao = new SuitePresidencial(numeroQuarto, tipoQuarto, quantidadeLeitos, precoBase, hotelid);
+        } else {
+            // Lidar com tipos de quarto desconhecidos
+            System.out.println("Tipo de quarto desconhecido: " + tipoQuarto);
+            return;
+        }
+
+        // Definir quantidade de leitos e outros atributos
+        novaAcomodacao.setQuantidadeLeitos(quantidadeLeitos);
+        novaAcomodacao.setPrecoBase(precoBase);
+        novaAcomodacao.setId(numeroQuarto);
+        novaAcomodacao.setTipo(tipoQuarto);
+        novaAcomodacao.setIdHotel(hotelid);
+
+        // Inserir acomodação no banco de dados
+        acomodacaoDAO.inserirAcomodacao(novaAcomodacao);
+        JOptionPane.showMessageDialog(this, "Acomodação criada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+        // Limpar campos após a inserção
+        limparCampos();
+
+        // Atualizar tabela de acomodações
+        atualizarTabelaAcomodacoes();
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Por favor, insira valores válidos para o número do quarto, número de camas ou preço.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Erro ao adicionar acomodação: " + e.getMessage(), "Erro de SQL", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Ocorreu um erro ao adicionar a acomodação: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void atualizarTabelaAcomodacoes() {
@@ -358,4 +375,8 @@ public class TelaAcomodacao extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNumeroCama;
     private javax.swing.JTextField txtNumeroQuarto1;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

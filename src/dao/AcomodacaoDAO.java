@@ -66,6 +66,25 @@ public class AcomodacaoDAO {
 
         return acomodacoes;
     }
+    // Verifica se já existe uma acomodação com a mesma quantidade de leitos e hotel ID
+    public boolean existeAcomodacaoPorQuantidadeLeitos(int quantidade_leitos, int hotelid) throws SQLException {
+        String sql = "SELECT COUNT(*) AS count FROM acomodacoes WHERE quantidade_leitos = ? AND hotel_id = ?";
+        try (Connection conexao = ConexaoBD.conectar();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setInt(1, quantidade_leitos);
+            stmt.setInt(2, hotelid);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt("count");
+                    return count > 0; // Retorna true se já existe uma acomodação com os mesmos dados
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao verificar acomodação existente: " + e.getMessage());
+            throw e;
+        }
+        return false; // Retorna false se não encontrou nenhuma acomodação com os mesmos dados
+    }
 public List<Object[]> buscarAcomodacoesPorHotelEData(int hotelId, java.sql.Date checkinDate, java.sql.Date checkoutDate) {
         List<Object[]> acomodações = new ArrayList<>();
         

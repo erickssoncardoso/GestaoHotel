@@ -249,6 +249,13 @@ public class Utilizador extends javax.swing.JInternalFrame {
         String username = txtusername.getText();
         String password = txtPassword.getText();
 
+        // Verificar se já existe um usuário com o mesmo email, contato ou username
+        UtilizadoresDAO utilizadorDAO = new UtilizadoresDAO();
+        if (utilizadorDAO.existeUtilizadorComDados(email, contato, username)) {
+            JOptionPane.showMessageDialog(this, "Já existe um usuário com o mesmo email, contato ou username. Por favor, verifique os dados.", "Erro ao adicionar usuário", JOptionPane.ERROR_MESSAGE);
+            return; // Sai do método sem adicionar o usuário
+        }
+
         // Criar uma nova instância de Utilizadores com base no tipo de usuário selecionado
         Utilizadores novoUtilizador;
         if (tipoUtilizador.equals("Cliente")) {
@@ -262,7 +269,6 @@ public class Utilizador extends javax.swing.JInternalFrame {
         }
 
         // Adicionar usuário no banco de dados
-        UtilizadoresDAO utilizadorDAO = new UtilizadoresDAO();
         utilizadorDAO.adicionarUtilizador(novoUtilizador);
         JOptionPane.showMessageDialog(this, "Utilizador adicionado!");
 
