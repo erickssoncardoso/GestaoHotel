@@ -28,7 +28,7 @@ public class Guest extends javax.swing.JFrame {
         telaPrincipalServico = new TelaPrincipalServico();
         labelUsername.setText(username);
         telaPrincipalServico.iniciarRelogio(jLabel3);
-        telaPrincipalServico.atualizarMenu(username, jMenuBar1, menuCadHospede, menuCadQuartos);
+        telaPrincipalServico.atualizarMenu(username, jMenuBar1, menuCadHospede, menuCadQuartos,MenuRegistHotel,MenuCadastUser);
     }
     /**
      * Creates new form TelaPrincipal
@@ -119,12 +119,12 @@ public class Guest extends javax.swing.JFrame {
         jMenu10 = new javax.swing.JMenu();
         menuCadQuartos = new javax.swing.JMenuItem();
         menuConsQuartos = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
+        MenuCadastUser = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        MenuRegistHotel = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -303,8 +303,8 @@ public class Guest extends javax.swing.JFrame {
 
         jMenu1.add(jMenu10);
 
-        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_funcionario.png"))); // NOI18N
-        jMenu8.setText("Utilizadores");
+        MenuCadastUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_funcionario.png"))); // NOI18N
+        MenuCadastUser.setText("Utilizadores");
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_salvar.png"))); // NOI18N
         jMenuItem2.setText("Cadastrar");
@@ -313,7 +313,7 @@ public class Guest extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem2);
+        MenuCadastUser.add(jMenuItem2);
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
         jMenuItem3.setText("Consultar");
@@ -322,9 +322,9 @@ public class Guest extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem3);
+        MenuCadastUser.add(jMenuItem3);
 
-        jMenu1.add(jMenu8);
+        jMenu1.add(MenuCadastUser);
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_fornecedor.png"))); // NOI18N
         jMenuItem1.setText("Fornecedores");
@@ -337,13 +337,13 @@ public class Guest extends javax.swing.JFrame {
 
         jMenu11.setText("Hoteis");
 
-        jMenuItem8.setText("Registrar");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        MenuRegistHotel.setText("Registrar");
+        MenuRegistHotel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                MenuRegistHotelActionPerformed(evt);
             }
         });
-        jMenu11.add(jMenuItem8);
+        jMenu11.add(MenuRegistHotel);
 
         jMenuItem9.setText("Consultar");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
@@ -460,11 +460,11 @@ public class Guest extends javax.swing.JFrame {
         telaacomodacao.setVisible(true);
     }//GEN-LAST:event_menuCadQuartosActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void MenuRegistHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRegistHotelActionPerformed
         TelaHotel tela=new TelaHotel();
         telaFundo.add(tela);
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_MenuRegistHotelActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
        
@@ -536,6 +536,8 @@ public class Guest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MenuCadastUser;
+    private javax.swing.JMenuItem MenuRegistHotel;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -552,7 +554,6 @@ public class Guest extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -561,7 +562,6 @@ public class Guest extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

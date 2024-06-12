@@ -30,7 +30,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaPrincipalServico = new TelaPrincipalServico();
         labelUsername.setText(username);
         telaPrincipalServico.iniciarRelogio(jLabel3);
-        telaPrincipalServico.atualizarMenu(username, jMenuBar1, menuCadHospede, menuCadQuartos);
+        telaPrincipalServico.atualizarMenu(username, jMenuBar1, menuCadHospede, menuCadQuartos,MenuRegistHotel,MenuCadastUser);
     }
     /**
      * Creates new form TelaPrincipal
@@ -66,6 +66,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu5.setVisible(false);
         jMenu6.setVisible(false);
         jMenu7.setVisible(false);
+        MenuRegistHotel.setVisible(false);
     } else if (userDAO.isFuncionario(username)) {
         menuLogin.setVisible(false);
         menuCadHospede.setEnabled(true);
@@ -131,10 +132,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadQuartos = new javax.swing.JMenuItem();
         menuConsQuartos = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        MenuCadastUser = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        MenuRegistHotel = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -309,14 +310,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_funcionario.png"))); // NOI18N
         jMenu8.setText("Utilizadores");
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_salvar.png"))); // NOI18N
-        jMenuItem2.setText("Cadastrar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        MenuCadastUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_salvar.png"))); // NOI18N
+        MenuCadastUser.setText("Cadastrar");
+        MenuCadastUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                MenuCadastUserActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem2);
+        jMenu8.add(MenuCadastUser);
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/buscar.png"))); // NOI18N
         jMenuItem3.setText("Consultar");
@@ -332,13 +333,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/hotel (2).png"))); // NOI18N
         jMenu11.setText("Hoteis");
 
-        jMenuItem8.setText("Registrar");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        MenuRegistHotel.setText("Registrar");
+        MenuRegistHotel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                MenuRegistHotelActionPerformed(evt);
             }
         });
-        jMenu11.add(jMenuItem8);
+        jMenu11.add(MenuRegistHotel);
 
         jMenuItem9.setText("Consultar");
         jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -593,21 +594,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void MenuRegistHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRegistHotelActionPerformed
         TelaHotel tela=new TelaHotel();
         telaFundo.add(tela);
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_MenuRegistHotelActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void MenuCadastUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastUserActionPerformed
         Utilizador utilizador = new Utilizador();
         telaFundo.add(utilizador);
         utilizador.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_MenuCadastUserActionPerformed
 
     private void menuCadQuartosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadQuartosActionPerformed
         TelaAcomodacao telaacomodacao = new TelaAcomodacao();
@@ -679,6 +680,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MenuCadastUser;
+    private javax.swing.JMenuItem MenuRegistHotel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -702,13 +705,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

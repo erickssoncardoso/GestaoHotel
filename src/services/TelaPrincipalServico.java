@@ -18,9 +18,9 @@ public class TelaPrincipalServico {
         this.utilizadoresDAO = new UtilizadoresDAO();
     }
 
-    public void atualizarMenu(String username, JMenuBar menuBar, JMenuItem menuCadHospede, JMenuItem menuCadQuartos) {
+    public void atualizarMenu(String username, JMenuBar menuBar, JMenuItem menuCadHospede, JMenuItem menuCadQuartos,JMenuItem MenuRegistHotel, JMenuItem MenuCadastUser ) {
         if (utilizadoresDAO.isCliente(username)) {
-            desativarMenusCliente(menuBar, menuCadHospede, menuCadQuartos);
+            desativarMenusCliente(menuBar, menuCadHospede, menuCadQuartos, MenuRegistHotel,MenuCadastUser);
         } else if (utilizadoresDAO.isFuncionario(username)) {
             ativarMenusFuncionario(menuCadHospede, menuCadQuartos);
         } else {
@@ -28,9 +28,12 @@ public class TelaPrincipalServico {
         }
     }
 
-    private void desativarMenusCliente(JMenuBar menuBar, JMenuItem menuCadHospede, JMenuItem menuCadQuartos) {
+    private void desativarMenusCliente(JMenuBar menuBar, JMenuItem menuCadHospede, JMenuItem menuCadQuartos, JMenuItem MenuRegistHotel,JMenuItem MenuCadastUser) {
         menuCadHospede.setEnabled(false);
         menuCadQuartos.setEnabled(false);
+        MenuRegistHotel.setEnabled(false);
+        MenuCadastUser.setEnabled(false);
+        
         for (int i = 1; i < menuBar.getMenuCount(); i++) {
             menuBar.getMenu(i).setVisible(false);
         }
