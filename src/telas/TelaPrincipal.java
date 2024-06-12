@@ -141,9 +141,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu12 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenu();
@@ -203,7 +205,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(labelUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 148, Short.MAX_VALUE)))
+                        .addGap(15, 149, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,29 +400,39 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/relatorios.png"))); // NOI18N
         jMenu5.setText("Relatórios   |");
 
-        jMenuItem7.setText("Disponibilidade de Acomodações");
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_quarto.png"))); // NOI18N
+        jMenu3.setText("Acomodações");
+
+        jMenuItem1.setText("Disponibilidade de Acomodações");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenu5.add(jMenu3);
+
+        jMenu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_checkin.png"))); // NOI18N
+        jMenu12.setText("Reservas");
+
+        jMenuItem7.setText("Reserva por Cliente");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem7);
+        jMenu12.add(jMenuItem7);
 
-        jMenuItem10.setText("Reserva por Cliente");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem12.setText("Reserva por Hotel");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                jMenuItem12ActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem10);
+        jMenu12.add(jMenuItem12);
 
-        jMenuItem11.setText("Reserva por Hotel");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItem11);
+        jMenu5.add(jMenu12);
 
         jMenuBar1.add(jMenu5);
 
@@ -573,27 +585,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu6ActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        LoginService loginService = new LoginService();
-        ConsultaAcomodacoes consulta= new ConsultaAcomodacoes(loginService); 
-        telaFundo.add(consulta);
-        consulta.setVisible(true);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        LoginService loginService = new LoginService();
-        ConsultaReservaCliente cons = new ConsultaReservaCliente(loginService);
-        telaFundo.add(cons);
-        cons.setVisible(true);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        LoginService loginService = new LoginService();
-        ConsultaReservaHotel cons = new ConsultaReservaHotel(loginService);
-        telaFundo.add(cons);
-        cons.setVisible(true);
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
-
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         ConsHotel cons= new ConsHotel();
         telaFundo.add(cons);
@@ -626,6 +617,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MouseClicked
         
     }//GEN-LAST:event_jMenuItem9MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        LoginService loginService = new LoginService();
+        ConsultaAcomodacoes consulta= new ConsultaAcomodacoes(loginService); 
+        telaFundo.add(consulta);
+        consulta.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        LoginService loginService = new LoginService();
+        ConsultaReservaCliente cons = new ConsultaReservaCliente(loginService);
+        telaFundo.add(cons);
+        cons.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        LoginService loginService = new LoginService();
+        ConsultaReservaHotel cons = new ConsultaReservaHotel(loginService);
+        telaFundo.add(cons);
+        cons.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
     
     
     
@@ -676,7 +688,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
@@ -684,8 +698,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
