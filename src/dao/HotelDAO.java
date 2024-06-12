@@ -67,6 +67,31 @@ public class HotelDAO {
         return hoteis;
     }
     
+    public List<String> listarNomesHoteis() {
+        List<String> nomesHoteis = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConexaoBD.conectar();
+            String query = "SELECT DISTINCT nome FROM hoteis";
+            stmt = conn.prepareStatement(query);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String nomeHotel = rs.getString("nome");
+                nomesHoteis.add(nomeHotel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConexaoBD.fecharConexao(conn);
+        }
+
+        return nomesHoteis;
+    }
+    
     public List<Object[]> buscarHoteisPorLocalizacao(String localizacao) {
         List<Object[]> hoteis = new ArrayList<>();
 
@@ -296,5 +321,44 @@ public List<Object[]> buscarTodosHoteis() {
 
     return hoteisDisponiveis;
 }
+    // Método para buscar o ID do hotel pelo nome
+    public int buscarIdPeloNome(String nomeHotel) {
+        int idHotel = 0; // Valor padrão para o caso de não encontrar nenhum hotel
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConexaoBD.conectar(); // Obtém a conexão com o banco de dados
+            String query = "SELECT id FROM hoteis WHERE nome = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, nomeHotel); // Define o parâmetro na query
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                idHotel = rs.getInt("id"); // Obtém o ID do hotel do resultado da consulta
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Trata qualquer exceção SQL imprimindo o stack trace
+        } finally {
+            // Fecha os recursos JDBC em um bloco finally para garantir que sejam fechados corretamente
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Trata qualquer exceção ao fechar recursos imprimindo o stack trace
+            }
+        }
+
+        return idHotel; // Retorna o ID do hotel encontrado (ou 0 se não encontrou nenhum)
+    }
 
 }

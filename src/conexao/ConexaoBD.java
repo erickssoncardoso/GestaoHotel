@@ -22,6 +22,36 @@ public class ConexaoBD {
      public static Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
+     
+     public static void fecharConexao(Connection conn) {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao fechar conexão: " + e.getMessage());
+            }
+        }
+    }
+
+    public static void fecharStatement(PreparedStatement stmt) {
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao fechar statement: " + e.getMessage());
+            }
+        }
+    }
+
+    public static void fecharResultSet(ResultSet rs) {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                System.out.println("Erro ao fechar result set: " + e.getMessage());
+            }
+        }
+    }
     
     
 }

@@ -477,7 +477,7 @@ public class Guest extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        ConsultaHotel consulta=new ConsultaHotel();
+        ConsHotel consulta=new ConsHotel();
         telaFundo.add(consulta);
         consulta.setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed

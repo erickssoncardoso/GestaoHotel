@@ -273,6 +273,45 @@ public boolean verificarExistenciaAcomodacao(int idAcomodacao) {
             return false;
         }
     }
+    // Método para adicionar uma reserva no banco de dados
+    public boolean adicionarReserva(Reserva reserva) {
+        boolean sucesso = false;
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = ConexaoBD.conectar(); // Obtém a conexão com o banco de dados
+            String query = "INSERT INTO reservas (id_cliente, id_hotel, id_acomodacao, data_checkin, data_checkout) VALUES (?, ?, ?, ?, ?)";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, reserva.getIdCliente());
+            stmt.setInt(2, reserva.getIdHotel());
+            stmt.setInt(3, reserva.getIdAcomodacao());
+            stmt.setDate(4, new java.sql.Date(reserva.getDataCheckin().getTime())); // Converte a data para java.sql.Date
+            stmt.setDate(5, new java.sql.Date(reserva.getDataCheckout().getTime())); // Converte a data para java.sql.Date
+
+            int linhasAfetadas = stmt.executeUpdate();
+            if (linhasAfetadas > 0) {
+                sucesso = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Trata qualquer exceção SQL imprimindo o stack trace
+        } finally {
+            // Fecha os recursos JDBC em um bloco finally para garantir que sejam fechados corretamente
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Trata qualquer exceção ao fechar recursos imprimindo o stack trace
+            }
+        }
+
+        return sucesso;
+    }
 
 
 

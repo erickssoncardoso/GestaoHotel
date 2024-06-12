@@ -28,7 +28,7 @@ import model.acomodacao.SuitePresidencial;
 
 
 
-public class ConsultaHotel extends javax.swing.JInternalFrame {
+public class ConsHotel extends javax.swing.JInternalFrame {
   private JLabel tipoLabel;
     private JLabel leitosLabel;
     private JLabel precoLabel;
@@ -43,7 +43,7 @@ public class ConsultaHotel extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaAcomodacao
      */
-    public ConsultaHotel() {
+    public ConsHotel() {
         initComponents();
     hotelDAO = new HotelDAO();
     reservaDAO = new ReservaDAO();
@@ -94,7 +94,7 @@ public class ConsultaHotel extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setText("Atualizar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
