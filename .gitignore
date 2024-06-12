@@ -1,0 +1,6 @@
+biblioteca/
+build/
+nbproject/private/
+test/
+build.xml
+manifest.mf
